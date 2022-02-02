@@ -1,0 +1,71 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dance Yes or No Plinko</title>
+  
+
+  <!--<link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
+
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+  <!-- your content here... -->
+  <h1>Super Date</h1>
+  <script src="matter.js"></script>
+  <script>
+    // module aliases
+    var Engine = Matter.Engine,
+        Render = Matter.Render,
+        Runner = Matter.Runner,
+        Bodies = Matter.Bodies,
+        Composite = Matter.Composite;
+
+    // create an engine
+    var engine = Engine.create();
+
+    // create a renderer
+    var render = Render.create({
+        element: document.body,
+        engine: engine
+    });
+
+    // create two boxes and a ground
+    var boxA = Bodies.rectangle(400, 200, 80, 80);
+    var boxB = Bodies.rectangle(450, 50, 80, 80);
+    var circle = Bodies.circle(400, 100, 25, {friction: .001, restitution: 1});
+
+    var ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
+
+    let objectArray = [];
+
+    for(let i = 0; i < 5; i++) {
+      for (let j = 0; j < ((i % 2 ==0) ? 6 : 7); j++) {
+        let toAdd = Bodies.circle( ((i % 2 ==0) ? (600 / 10) : 0) + 35 + j * (600 / 5),  105 + i * (700 / 8), 15, {isStatic : true, friction: .001, restitution: 1});
+        objectArray.push(toAdd);
+      }
+    }
+
+    objectArray.push(circle);
+    
+    objectArray.push(ground);
+
+    // add all of the bodies to the world
+    Composite.add(engine.world, objectArray);
+
+    // run the renderer
+    Render.run(render);
+
+    // create runner
+    var runner = Runner.create();
+
+    // run the engine
+    Runner.run(runner, engine);
+  </script>
+</body>
+</html>
