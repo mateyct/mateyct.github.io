@@ -1,3 +1,7 @@
-button {
-    display: block;
+.control-button {
+    
+}
+
+.move-button {
+    font-size: 6em;
 }

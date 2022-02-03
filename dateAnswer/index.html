@@ -17,22 +17,34 @@
 <body>
   <!-- your content here... -->
   <h1>Does Mason want to go with Brooke to the dance?</h1>
-  <h2>Drag the ball to a starting position to find your answer.</h2>
+  <h2>Use the buttons to move the starting location of the ball.</h2>
   <script src="matter.js"></script>
-  <button id="goButton">Go</button>
+
+  <p>
+    <button id="leftButton" class="move-button">←</button>
+    <button id="rightButton" class="move-button">→</button>
+  </p>
+
+  <p>
+    <button id="goButton" class="control-button">Go</button>
+    <button id="refreshButton" class="control-button">Try again</button>
+  </p>
   <script>
     // module aliases
     var Engine = Matter.Engine,
         Render = Matter.Render,
         Runner = Matter.Runner,
         Bodies = Matter.Bodies,
+        Body = Matter.Body,
         Composite = Matter.Composite,
         Mouse = Matter.Mouse,
-        MouseConstraint = Matter.MouseConstraint;
+        MouseConstraint = Matter.MouseConstraint,
+        Events = Matter.Events;
 
     var defaultCategory = 0x0001,
     ballCategory = 0x0002,
-    pegCategory = 0x0004;
+    pegCategory = 0x0004,
+    goalCategory = 0x0008;
 
     // create an engine
     var engine = Engine.create();
@@ -58,13 +70,14 @@
       }
     });
 
-    var ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
-    var ceiling = Bodies.rectangle(400, -20, 810, 60, { isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
-    var ledge = Bodies.rectangle(400, 80, 810, 10, { isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
-    var leftWall = Bodies.rectangle(-20, 300, 60, 610, { isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
-    var rightWall = Bodies.rectangle(820, 300, 60, 610, { isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
+    var ground = Bodies.rectangle(400, 610, 810, 60, {friction: .001, isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
+    var ceiling = Bodies.rectangle(400, -20, 810, 60, { friction: .001, isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
+    var ledge = Bodies.rectangle(400, 80, 810, 10, { friction: .001, isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
+    var leftWall = Bodies.rectangle(-20, 300, 60, 610, { friction: .001, isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
+    var rightWall = Bodies.rectangle(820, 300, 60, 610, { friction: .001, isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
 
     var bounds = [ledge, ceiling, leftWall, rightWall];
+    var running = false;
 
     Composite.add(engine.world, bounds);
 
@@ -87,6 +100,33 @@
       }
     }
 
+    for(let i = 0; i < 4; i++) {
+      let toAdd = Bodies.rectangle((i + 1) * (800 / 5), 550 , 10, 75, {
+        isStatic: true,
+        render: {
+          fillStyle: "#0000ff"
+        }
+      });
+      objectArray.push(toAdd);
+    }
+
+    let sensors = [];
+    for(let i = 0; i < 5; i++) {
+      let toAdd = Bodies.rectangle(((i * 2) + 1) * (800 / 10), 575 , (800 / 5), 50, {
+        isStatic: true,
+        isSensor: true,
+        render: {
+          fillStyle: "transparent"
+        },
+        collisionFilter: {
+          category: goalCategory
+        }
+      });
+      sensors.push(toAdd);
+      objectArray.push(toAdd);
+    }
+    
+
     objectArray.push(circle);
     
     objectArray.push(ground);
@@ -106,10 +146,89 @@
     document.getElementById("goButton").addEventListener("click", () => {
       Composite.remove(engine.world, ledge);
       circle.restitution = 1;
+      running = true;
+    });
+
+    var functionList = [
+      () => {
+        console.log("first");
+        circle.collisionFilter.mask = defaultCategory;
+        circle.restitution = 0;
+      },
+      () => {
+        console.log("2");
+        circle.collisionFilter.mask = defaultCategory;
+        circle.restitution = 0;
+      },
+      () => {
+        console.log("3");
+        circle.collisionFilter.mask = defaultCategory;
+        circle.restitution = 0;
+      },
+      () => {
+        console.log("4");
+        circle.collisionFilter.mask = defaultCategory;
+        circle.restitution = 0;
+      },
+      () => {
+        console.log("5");
+        circle.collisionFilter.mask = defaultCategory;
+        circle.restitution = 0;
+      }
+    ];
+    
+    Events.on(engine, 'collisionStart', function(event) {
+        var pairs = event.pairs;
+        
+        for (var i = 0, j = pairs.length; i != j; ++i) {
+            var pair = pairs[i];
+            if (pair.bodyA === circle) {
+                if(pair.bodyB === sensors[0]) {
+                  functionList[0]();
+                }
+                if(pair.bodyB === sensors[1]) {
+                  functionList[1]();
+                }
+                if(pair.bodyB === sensors[2]) {
+                  functionList[2]();
+                }
+                if(pair.bodyB === sensors[3]) {
+                  functionList[3]();
+                }
+                if(pair.bodyB === sensors[4]) {
+                  functionList[4]();
+                }
+            } 
+            else if (pair.bodyB === circle) {
+              if(pair.bodyA === sensors[0]) {
+                  functionList[0]();
+                }
+                if(pair.bodyA === sensors[1]) {
+                  functionList[1]();
+                }
+                if(pair.bodyA === sensors[2]) {
+                  functionList[2]();
+                }
+                if(pair.bodyA === sensors[3]) {
+                  functionList[3]();
+                }
+                if(pair.bodyA === sensors[4]) {
+                  functionList[4]();
+                }
+            }
+        }
+    });
+    document.getElementById("leftButton").addEventListener("click", (e) => {
+      if(!running)
+      Body.applyForce(circle, circle.position, Matter.Vector.create(-.004 * circle.mass, 0));
+    });
+    document.getElementById("rightButton").addEventListener("click", (e) => {
+      if(!running)
+      Body.applyForce(circle, circle.position, Matter.Vector.create(.004 * circle.mass, 0));
     });
 
   </script>
-  <button id="refreshButton">Try again</button>
+  
   <script>
     // set refresh button
     document.getElementById("refreshButton").addEventListener("click", () => {location.reload()});
