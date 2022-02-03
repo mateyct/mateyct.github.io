@@ -16,15 +16,23 @@
 
 <body>
   <!-- your content here... -->
-  <h1>Super Date</h1>
+  <h1>Does Mason want to go with Brooke to the dance?</h1>
+  <h2>Drag the ball to a starting position to find your answer.</h2>
   <script src="matter.js"></script>
+  <button id="goButton">Go</button>
   <script>
     // module aliases
     var Engine = Matter.Engine,
         Render = Matter.Render,
         Runner = Matter.Runner,
         Bodies = Matter.Bodies,
-        Composite = Matter.Composite;
+        Composite = Matter.Composite,
+        Mouse = Matter.Mouse,
+        MouseConstraint = Matter.MouseConstraint;
+
+    var defaultCategory = 0x0001,
+    ballCategory = 0x0002,
+    pegCategory = 0x0004;
 
     // create an engine
     var engine = Engine.create();
@@ -34,19 +42,47 @@
         element: document.body,
         engine: engine
     });
-
+    render.options.wireframes = false;
     // create two boxes and a ground
     var boxA = Bodies.rectangle(400, 200, 80, 80);
     var boxB = Bodies.rectangle(450, 50, 80, 80);
-    var circle = Bodies.circle(400, 100, 25, {friction: .001, restitution: 1});
 
-    var ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
+    var circle = Bodies.circle(400, 25, 25, {
+      friction: .001,
+      restitution: 0,
+      collisionFilter: {
+        category: ballCategory
+      },
+      render: {
+        fillStyle: "#FF3C33"
+      }
+    });
+
+    var ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
+    var ceiling = Bodies.rectangle(400, -20, 810, 60, { isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
+    var ledge = Bodies.rectangle(400, 80, 810, 10, { isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
+    var leftWall = Bodies.rectangle(-20, 300, 60, 610, { isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
+    var rightWall = Bodies.rectangle(820, 300, 60, 610, { isStatic: true, render: {fillStyle: "#0000ff", lineWidth: 1} });
+
+    var bounds = [ledge, ceiling, leftWall, rightWall];
+
+    Composite.add(engine.world, bounds);
 
     let objectArray = [];
 
     for(let i = 0; i < 5; i++) {
       for (let j = 0; j < ((i % 2 ==0) ? 6 : 7); j++) {
-        let toAdd = Bodies.circle( ((i % 2 ==0) ? (600 / 10) : 0) + 35 + j * (600 / 5),  105 + i * (700 / 8), 15, {isStatic : true, friction: .001, restitution: 1});
+        let toAdd = Bodies.circle( ((i % 2 ==0) ? (600 / 10) : 0) + 35 + j * (600 / 5),  105 + i * (700 / 8), 15, {
+          isStatic : true, 
+          friction: .001,
+          restitution: .5,
+          collisionFilter: {
+            category: pegCategory
+          },
+          render : {
+            fillStyle: "#BA8C63"
+          }
+        });
         objectArray.push(toAdd);
       }
     }
@@ -54,7 +90,7 @@
     objectArray.push(circle);
     
     objectArray.push(ground);
-
+    
     // add all of the bodies to the world
     Composite.add(engine.world, objectArray);
 
@@ -66,6 +102,17 @@
 
     // run the engine
     Runner.run(runner, engine);
+
+    document.getElementById("goButton").addEventListener("click", () => {
+      Composite.remove(engine.world, ledge);
+      circle.restitution = 1;
+    });
+
+  </script>
+  <button id="refreshButton">Try again</button>
+  <script>
+    // set refresh button
+    document.getElementById("refreshButton").addEventListener("click", () => {location.reload()});
   </script>
 </body>
 </html>
