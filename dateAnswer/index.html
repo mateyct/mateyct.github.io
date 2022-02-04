@@ -128,7 +128,7 @@
 
     let sensors = [];
     for(let i = 0; i < 6; i++) {
-      let toAdd = Bodies.rectangle(((i * 2) + 1) * (800 / 12), 575 , (800 / 6), 50, {
+      let toAdd = Bodies.rectangle(((i * 2) + 1) * (800 / 12), 575 , (800 / 6) - 20, 50, {
         isStatic: true,
         isSensor: true,
         render: {
