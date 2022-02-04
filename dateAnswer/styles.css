@@ -1,7 +1,57 @@
 .control-button {
-    
+    background-color: #1a73e8;
+    border: none;
+    color: white;
+    width: 40%;
+    padding: 15px;
+    font-size: 4em;
+    border-radius: 15px;
+}
+.control-button:hover {
+    background-color: #155bb8;
+}
+
+.control-container {
+    text-align: center;
 }
 
 .move-button {
     font-size:  6em;
+    background-color: cornflowerblue;
+    border: none;
+    border-radius: 15px;
+    max-width: 30%;
+    width: 20%;
+    padding: 15px;
+    color: white;
+}
+
+.move-button:hover {
+    background-color: rgb(85, 125, 199);
+}
+
+.direction-buttons {
+    text-align: center;
+}
+.canvas-container {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+}
+button {
+    cursor: pointer;
+}
+.top-text {
+    font-size: 5em;
+    margin: 5px;
+}
+.img-center {
+    text-align: center;
+}
+.img-center img {
+    width: 70%;
+    display: none;
 }
