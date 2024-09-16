@@ -1,3 +1,32 @@
+li a {
+    text-decoration: none;
+    user-select: none;
+}
+li a:visited {
+    text-decoration: none;
+    user-select: none;
+    color: black;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+nav ul {
+    width: 30%;
+    display: flex;
+    list-style-type: none;
+    justify-content: space-evenly;
+    padding: 0;
+}
+nav ul li {
+    width: fit-content;
+}
 h2 {
-    background-color: darkgoldenrod;
+    width: 30%;
+    text-align: center;
+}
+.profile-pic {
+    width: 4em;
+    height: 4em;
+    border-radius: 1em;
 }
