@@ -86,3 +86,30 @@ html, body {
 }
 
 /*CSS for the navigation bar*/
+.nav {
+    background-color: #2F436B;
+}
+.nav ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+.nav ul li {
+    margin: 10px 0;
+    width: 30%;
+    text-align: center;
+}
+.nav ul li a {
+    font-size: 2em;
+}
+a {
+    color: #FFFEB8;
+    text-decoration: none;
+}
+a:hover {
+    color: #FFFEB8;
+    text-decoration: none;
+}
+a:visited {
+    color: #FFFEB8;
+    text-decoration: none;
+}
