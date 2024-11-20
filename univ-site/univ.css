@@ -72,3 +72,10 @@ h1 {
     padding: 10px 20px;
     font-size: 2em;
 }
+.background {
+    background-image: url("images/field.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 500px;
+    background-position: center;
+}
