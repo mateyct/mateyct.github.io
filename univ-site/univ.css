@@ -65,17 +65,25 @@ h1 {
     display: flex;
     justify-content: space-evenly;
 }
+.navbar ul li {
+    width: 25%;
+    text-align: center;
+}
 .navbar ul li a {
     display: block;
     text-decoration: none;
     color: white;
     padding: 10px 20px;
     font-size: 2em;
+    transition: color .5s;
 }
-.background {
-    background-image: url("images/field.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 500px;
-    background-position: center;
+.navbar ul li a:hover {
+    color: #dddddd;
+}
+.byu-field {
+    width: 100%;
+}
+
+footer p {
+    text-align: center;
 }
