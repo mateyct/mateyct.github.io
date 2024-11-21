@@ -56,6 +56,9 @@ html {
     background-image: url("images/field.jpg");
     background-size: cover;
 }
+body {
+    margin-bottom: 30px;
+}
 h1 {
     text-align: center;
     font-size: 4em;
@@ -112,7 +115,7 @@ main {
 
 .reason-column {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
     margin: 50px auto ;
 }
 
@@ -122,8 +125,15 @@ main {
     display: block;
 }
 
+.reason-column vr {
+    height: 100%;
+    border: white solid 1px;
+    width: 1px;
+}
+
 .reason-column div p {
     font-size: 1.2em;
+    padding: 10px;
 }
 
 .reason-column div h3 {
