@@ -88,6 +88,47 @@ h1 {
 .byu-field {
     width: 100%;
 }
+.page-content {
+    text-align: center;
+    background-color: black;
+    width: 75%;
+    margin: 20px;
+    border: white 2px solid;
+    border-radius: 25px;
+    color: white;
+}
+.page-content h2 {
+    font-size: 4em;
+    margin: 50px;
+}
+.page-content p {
+    font-size: 1.5em;
+    margin: 10px;
+}
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.reason-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 50px auto ;
+}
+
+.reason-column div {
+    width: 100%;
+    height: fit-content;
+    display: block;
+}
+
+.reason-column div p {
+    font-size: 1.2em;
+}
+
+.reason-column div h3 {
+    font-size: 2em;
+}
 
 .footer {
     position: fixed;
