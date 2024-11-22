@@ -112,7 +112,8 @@ h1 {
 }
 main {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .reason-column {
@@ -142,7 +143,39 @@ main {
     font-size: 2em;
     color: #002E5D;
 }
+.normal-title {
+    font-size: 4em;
+    margin: 30px;
+    color: black;
+}
 
+.quadrants {
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr;
+    width: 80%;
+}
+
+.quadrants div {
+    width: 85%;
+    text-align: center;
+    background-color: #e9f0fabb;
+    border: #002255 2px solid;
+    border-radius: 25px;
+    margin: 20px;
+}
+
+.quadrants div h3 {
+    font-size: 2em;
+    color: #002E5D;
+}
+
+.quadrants div p {
+    font-size: 1.2em;
+    padding: 10px;
+    color: #252525;
+}
+
+/*Footer CSS*/
 .footer {
     position: fixed;
     left: 0;
