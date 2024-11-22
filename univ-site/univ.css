@@ -93,20 +93,22 @@ h1 {
 }
 .page-content {
     text-align: center;
-    background-color: black;
+    background-color: #e9f0fabb;
     width: 75%;
     margin: 20px;
-    border: white 2px solid;
+    border: #002255 2px solid;
     border-radius: 25px;
-    color: white;
+    color: black;
 }
 .page-content h2 {
     font-size: 4em;
     margin: 50px;
+    color: #002E5D;
 }
 .page-content p {
     font-size: 1.5em;
     margin: 10px;
+    color: #252525;
 }
 main {
     display: flex;
@@ -127,7 +129,7 @@ main {
 
 .reason-column vr {
     height: 100%;
-    border: white solid 1px;
+    border: #002255 solid 1px;
     width: 1px;
 }
 
@@ -138,6 +140,7 @@ main {
 
 .reason-column div h3 {
     font-size: 2em;
+    color: #002E5D;
 }
 
 .footer {
