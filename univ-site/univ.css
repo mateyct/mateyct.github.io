@@ -145,8 +145,11 @@ main {
 }
 .normal-title {
     font-size: 4em;
-    margin: 20px;
-    color: white;
+    margin: 10px;
+    color: #252525;
+    background-color: #e9f0fa7a;
+    padding: 10px 20px;
+    border-radius: 20px;
 }
 
 .quadrants {
