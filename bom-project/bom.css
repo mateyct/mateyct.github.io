@@ -100,6 +100,10 @@ html, body {
 }
 .nav ul li a {
     font-size: 2em;
+    transition: color .5s;
+}
+.nav ul li a:hover {
+    color: #858463;
 }
 a {
     color: #FFFEB8;
