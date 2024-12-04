@@ -194,3 +194,28 @@ a:visited {
     vertical-align: middle;
 }
 /*Lens CSS*/
+section.reference-select {
+    display: block;
+}
+.reference-select h3 {
+    font-size: 2.5em;
+    margin: 10px;
+}
+#references {
+    font-size: 2em;
+}
+#references li {
+    margin: 10px;
+    cursor: pointer;
+    transition: color .5s;
+    color: #002472;
+}
+#references li:hover {
+    color: #919fba;
+}
+#verse {
+    font-size: 2em;
+}
+#analysis {
+    font-size: 2em;
+}
